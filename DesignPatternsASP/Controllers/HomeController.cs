@@ -1,5 +1,7 @@
-﻿using DesignPatternsASP.Models;
+﻿using DesignPatternsASP.Configuration;
+using DesignPatternsASP.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Diagnostics;
 using Tools;
 
@@ -7,20 +9,22 @@ namespace DesignPatternsASP.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IOptions<MyConfig> _options;
+        public HomeController(IOptions<MyConfig> options)
         {
+            _options = options;
         }
 
         public IActionResult Index()
         {
-            Log.GetInstance("log.txt").Save("User went to index");
+            Log.GetInstance(_options.Value.PathLog).Save("User went to index");
 
             return View();
         }
 
         public IActionResult Privacy()
         {
-            Log.GetInstance("log.txt").Save("User went to privacy");
+            Log.GetInstance(_options.Value.PathLog).Save("User went to privacy");
             return View();
         }
 
