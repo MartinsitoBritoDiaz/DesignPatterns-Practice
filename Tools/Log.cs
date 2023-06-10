@@ -21,7 +21,7 @@
         }
         private Log(string path) 
         {
-            _path = path;
+            _path = path; 
         }
 
         public void Save(string message)
