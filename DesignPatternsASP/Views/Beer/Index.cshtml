@@ -1,0 +1,25 @@
+﻿@using DesignPatternsASP.Models.ViewModels;
+@model IEnumerable<BeerViewModel>
+
+<div class="row">
+    <div class="col-12">
+        <a class="btn btn-primary" href="~/Beer/Add">New Beer</a>
+    </div>
+</div>
+
+<div class="row">
+    <h1>Beers</h1>
+    <div class="col-12">
+        <table class="table">
+            <tr>
+                <th>Name</th>
+            </tr>
+            @foreach (var beer in Model)
+            {
+                <tr>
+                    <td>@beer.Name</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

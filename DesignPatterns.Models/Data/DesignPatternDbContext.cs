@@ -20,16 +20,13 @@ public partial class DesignPatternDbContext : DbContext
     public virtual DbSet<Brand> Brands { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=MSI\\SQLEXPRESS; Database=DesignPatternDB; Trusted_Connection=True; Trust Server Certificate=true;");
-
+    { }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Beer>(entity =>
         {
             entity.ToTable("Beer");
 
-            entity.Property(e => e.BeerId).ValueGeneratedNever();
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -47,7 +44,7 @@ public partial class DesignPatternDbContext : DbContext
         {
             entity.ToTable("Brand");
 
-            entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
+            entity.Property(e => e.BrandId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsUnicode(false);

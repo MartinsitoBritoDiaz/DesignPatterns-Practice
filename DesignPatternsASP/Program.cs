@@ -1,5 +1,6 @@
 using DesignPatterns.Models.Data;
 using DesignPatterns.Repository;
+using DesignPatterns.Repository.UnitOfWork;
 using DesignPatternsASP.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Tools.Earn;
@@ -28,6 +29,7 @@ builder.Services.AddTransient(factory =>
 });
 
 builder.Services.AddScoped( typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddDbContext<DesignPatternDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Connection"));
