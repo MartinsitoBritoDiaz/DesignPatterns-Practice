@@ -4,6 +4,7 @@ using DesignPatterns.Repository.UnitOfWork;
 using DesignPatternsASP.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Tools.Earn;
+using Tools.Generator;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,10 @@ builder.Services.AddTransient(factory =>
 
 builder.Services.AddScoped( typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<Generator>();
+builder.Services.AddScoped<GeneratorConcreteBuilder>();
+
 builder.Services.AddDbContext<DesignPatternDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Connection"));
